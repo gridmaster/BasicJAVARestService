@@ -1,5 +1,7 @@
 package com.firefly.dao;
 
+import java.sql.Connection;
+
 import javax.naming.*;
 import javax.sql.*;
 
@@ -25,6 +27,18 @@ public class MS101Club {
 		}
 		
 		return MSSql101Club;
-		
+	}
+	
+	protected static Connection MSSQLSymbolConnection() {
+		 Connection conn = null;
+		 try {
+			 conn = MSSQL101ClubConn().getConnection();
+			 return conn;
+		 }
+		 catch (Exception ex) {
+			 ex.printStackTrace();
+		 }
+		 
+		 return conn;
 	}
 }
