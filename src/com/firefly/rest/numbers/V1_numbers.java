@@ -43,4 +43,30 @@ public class V1_numbers {
 		
 		return Response.ok(returnString).build();
 	}
+	
+	@Path("/{max}/{picks}/{pmax}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response returnPBNumbers(
+					@PathParam("max") Integer max ,
+					@PathParam("picks") Integer picks,
+					@PathParam("pmax") Integer pmax)
+					throws Exception {
+
+		JsonObject returnJson = null;
+		String returnString = null;
+		
+		try {
+		
+			returnString = Picks.GetPicks(max, picks);
+			
+			returnString = returnString + ",PB:" + Picks.GetPicks(pmax, 1);
+		}
+		catch( Exception ex) {
+			ex.printStackTrace();
+			return Response.status(500).entity("Server was not able to process yoru request").build();
+		}
+		
+		return Response.ok(returnString).build();
+	}
 }

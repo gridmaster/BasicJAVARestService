@@ -13,8 +13,6 @@ public class Picks {
     public static String GetPicks(Integer max, Integer picks) {
     	ArrayList<Integer> myPix = new ArrayList<Integer>();
     	
-    	picks = 6;
-    	
     	for(Integer i=0; i<picks; i++) {
     		Integer nInt = nextInt(1, max);
     		if ( myPix.indexOf(nInt) > -1)
