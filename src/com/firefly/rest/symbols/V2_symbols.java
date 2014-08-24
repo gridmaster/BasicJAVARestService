@@ -71,34 +71,4 @@ public class V2_symbols {
 		
 		return Response.ok(returnString).build();
 	}
-
-	/*
-	@Path("/{max}/{picks}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response returnSymbol(
-			@PathParam("max") int max,
-			@PathParam("picks") int picks)
-					throws Exception {
-
-		String returnString = null;
-		JSONArray json = new JSONArray();
-		
-		try {
-						
-			json = dao.queryReturnSymbolName(symbol);
-			returnString = json.toString();
-		}
-		catch( Exception ex) {
-			ex.printStackTrace();
-			return Response.status(500).entity("Server was not able to process yoru request").build();
-		}
-		
-		return Response.ok(returnString).build();
-	}
-	*/
-	/*
-	Random r = new Random();
-	int i = r.nextInt()
-*/
 }

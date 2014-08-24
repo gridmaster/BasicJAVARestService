@@ -1,10 +1,10 @@
 package com.firefly.rest.numbers;
 
-import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -24,17 +24,15 @@ public class V1_numbers {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response returnNumbers(
 					@PathParam("max") Integer max ,
-					@PathParam("picks") Integer picks)
+					@PathParam("picks") Integer picks,
+					@QueryParam("faves") String faves)
 					throws Exception {
 
-		JsonObject returnJson = null;
 		String returnString = null;
 		
-		try {
-		
-			returnString = Picks.GetPicks(max, picks);
-			
-			//returnString = returnJson.toString();
+		try {			
+			if (faves == null) faves = "";
+			returnString = Picks.GetPicks(max, picks, faves);
 		}
 		catch( Exception ex) {
 			ex.printStackTrace();
@@ -50,17 +48,20 @@ public class V1_numbers {
 	public Response returnPBNumbers(
 					@PathParam("max") Integer max ,
 					@PathParam("picks") Integer picks,
-					@PathParam("pmax") Integer pmax)
+					@PathParam("pmax") Integer pmax,
+					@QueryParam("faves") String faves,
+					@QueryParam("pbFave") String pbFave)
 					throws Exception {
 
-		JsonObject returnJson = null;
 		String returnString = null;
 		
 		try {
 		
-			returnString = Picks.GetPicks(max, picks);
+			if (faves == null) faves = "";
+			returnString = Picks.GetPicks(max, picks, faves);
 			
-			returnString = returnString + ",PB:" + Picks.GetPicks(pmax, 1);
+			if (pbFave == null) pbFave = "";
+			returnString = returnString + ",PB:" + Picks.GetPicks(pmax, 1, pbFave);
 		}
 		catch( Exception ex) {
 			ex.printStackTrace();
