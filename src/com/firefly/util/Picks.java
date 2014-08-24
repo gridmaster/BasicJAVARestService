@@ -1,6 +1,7 @@
 package com.firefly.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class Picks {
@@ -27,6 +28,8 @@ public class Picks {
     		else
     			myPix.add(nInt);
     	}
+    	
+    	Collections.sort(myPix);
     	
     	String json = myPix.toString();
     	

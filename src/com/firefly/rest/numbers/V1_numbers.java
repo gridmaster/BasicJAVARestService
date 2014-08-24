@@ -25,14 +25,19 @@ public class V1_numbers {
 	public Response returnNumbers(
 					@PathParam("max") Integer max ,
 					@PathParam("picks") Integer picks,
-					@QueryParam("faves") String faves)
+					@QueryParam("faves") String faves,
+					@QueryParam("tix") Integer tix)
 					throws Exception {
 
-		String returnString = null;
+		String returnString = "";
 		
-		try {			
+		try {
+			if (tix == null ) tix = 1;
 			if (faves == null) faves = "";
-			returnString = Picks.GetPicks(max, picks, faves);
+			
+			while( tix-- > 0 ) {
+				returnString += Picks.GetPicks(max, picks, faves) + "\n";
+			}
 		}
 		catch( Exception ex) {
 			ex.printStackTrace();
@@ -50,18 +55,22 @@ public class V1_numbers {
 					@PathParam("picks") Integer picks,
 					@PathParam("pmax") Integer pmax,
 					@QueryParam("faves") String faves,
-					@QueryParam("pbFave") String pbFave)
+					@QueryParam("pbFave") String pbFave,
+					@QueryParam("tix") Integer tix)
 					throws Exception {
 
-		String returnString = null;
+		String returnString = "";
 		
 		try {
 		
+			if (tix == null ) tix = 1;
 			if (faves == null) faves = "";
-			returnString = Picks.GetPicks(max, picks, faves);
-			
 			if (pbFave == null) pbFave = "";
-			returnString = returnString + ",PB:" + Picks.GetPicks(pmax, 1, pbFave);
+			
+			while( tix-- > 0 ) {
+				returnString += Picks.GetPicks(max, picks, faves);
+				returnString += ",PB:" + Picks.GetPicks(pmax, 1, pbFave) + "\n";
+			}
 		}
 		catch( Exception ex) {
 			ex.printStackTrace();
